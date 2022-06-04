@@ -1,26 +1,17 @@
-import {useParams} from 'react-router'
-import {fetchMoviesCast} from '../servises/ServisTMDB'
-import {useState,useEffect} from 'react'
-
-
-const Cast = () => {
-    const  [casts, setCast ] = useState(null);
-    const { moviesId } = useParams();
-console.log(casts)
-useEffect(() => {
-        fetchMoviesCast(moviesId).then(setCast)
-},[moviesId]);
+import {useFetchCact} from '../hooks/useFetchCact'
+ const Cast = () => {
+    const casts=useFetchCact()
 
     return (
         <>
             <ul>
-                {casts && casts.map(cast => <li key={cast.id}>
-                    <img src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`} alt={ cast.name} width = '100'/>
-                    <p>{cast.name}</p></li>)}
+                {casts && casts.map(({profile_path,id,name}) => <li key={id}>
+                    <img src={`https://image.tmdb.org/t/p/w500/${profile_path}`} alt={name} width = '100'/>
+                    <p>{name}</p></li>)}
 </ul>
     </>
 
     );
 }
 
-export default Cast;
+export default Cast

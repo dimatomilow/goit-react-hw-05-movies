@@ -8,6 +8,8 @@ export const Ul = styled.ul`
     margin: 0px auto;
     padding: 0px;
     list-style: none;
+    margin-top:25px;
+
 `;
 export const Li = styled.li`
 margin:10px
@@ -23,7 +25,7 @@ export const Img = styled.img`
     display: block;
     max-width: 100%;
     height: auto;
-}
+
 `;
 export const Title = styled.p`
 font-weight: 700;

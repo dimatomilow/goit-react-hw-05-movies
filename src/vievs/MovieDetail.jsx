@@ -1,26 +1,18 @@
-import {useEffect,useState} from 'react'
-import {fetchMoviesDetails} from '../servises/ServisTMDB'
-import {useParams,Outlet } from 'react-router-dom'
+import{useFetchMovieDidails} from '../hooks/useFetchMovieDidails'
+import {Outlet } from 'react-router-dom'
 import { Section, Div,Information,Img } from '../component/Styles/MovieDetailStyles'
 import { LinkViev } from '../component/Styles/link.styles'
+import BackLink from '../component/BackLink/BackLink'
 
-
-
-const MovieDetail = () => {
-    const [movies, setMovie] = useState(null);
-    const {moviesId} = useParams()
-
-
-    useEffect(() => {
-        fetchMoviesDetails(moviesId).then(setMovie)
-    }, [moviesId]);
-
+ const MovieDetail = () => {
+     const movies = useFetchMovieDidails()
 
     return (
-
         <>
-            {movies &&(<Section>
-                 <Img src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`} alt={movies.title}  />
+            <BackLink/>
+            {movies && (<Section>
+                {movies.poster_path ? (<Img src={`https://image.tmdb.org/t/p/w500/${movies.poster_path} `} alt={movies.title} />):(<Img src={`https://image.tmdb.org/t/p/w500/${movies.backdrop_path} `} alt={movies.title} />)}
+                 {/* <Img src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`} alt={movies.title}  /> */}
                 <Div>
                 <h1>{movies.title}</h1>
                 <h2>overview</h2>
@@ -41,4 +33,4 @@ const MovieDetail = () => {
     );
 }
 
-export default MovieDetail;
+export default MovieDetail

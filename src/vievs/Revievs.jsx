@@ -1,27 +1,13 @@
-import {useParams} from 'react-router'
-import {fetchMoviesRevievs} from '../servises/ServisTMDB'
-import {useState,useEffect} from 'react'
+import {useFetchReviews } from '../hooks/useFetchReviews'
 
-
-const Cast = () => {
-    const  [revievs, setRevievs ] = useState(null);
-    const { moviesId } = useParams();
-console.log(revievs)
-useEffect(() => {
-        fetchMoviesRevievs(moviesId).then(setRevievs)
-},[moviesId]);
+ const Reviews = () => {
+   const reviews=useFetchReviews()
 
     return (
-        <>
             <ul>
-
-                {revievs && revievs.map(({author,content,id}) => <li key={id}>
+                {reviews && reviews.map(({author,content,id}) => <li key={id}>
                     <h2>{author}</h2>
                     <p>{content}</p></li>)}
 </ul>
-    </>
-
-    );
-}
-
-export default Cast;
+    );}
+export default Reviews
